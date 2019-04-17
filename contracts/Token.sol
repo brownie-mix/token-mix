@@ -1,9 +1,9 @@
 pragma solidity ^0.5.0;
 
-
 import "./SafeMath.sol";
 
 contract Token {
+
     using SafeMath for uint256;
 
     string public symbol;
@@ -78,10 +78,6 @@ contract Token {
         balances[_to] = balances[_to].add(_value);
         emit Transfer(_from, _to, _value);
         return true;
-    }
-
-    function ok() external view returns (address) {
-        return msg.sender;
     }
 
 }
