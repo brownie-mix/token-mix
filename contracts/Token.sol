@@ -73,6 +73,7 @@ contract Token {
         public
         returns (bool)
     {
+        require(allowed[_from][msg.sender] >=_value, "Insufficient allowance");
         balances[_from] = balances[_from].sub(_value);
         allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
         balances[_to] = balances[_to].add(_value);
