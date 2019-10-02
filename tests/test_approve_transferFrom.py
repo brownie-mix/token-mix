@@ -28,10 +28,8 @@ def test_transferFrom(token, accounts):
     assert token.allowance(accounts[0], accounts[1]) == "1 ether"
 
 
-def test_transferFrom_reverts(token, accounts):
+@pytest.mark.parametrize('idx', [0, 1, 2])
+def test_transferFrom_reverts(token, accounts, idx):
     '''transerFrom should revert'''
     with pytest.reverts("Insufficient allowance"):
-        token.transferFrom(accounts[0], accounts[2], "1 ether", {'from': accounts[1]})
-
-    with pytest.reverts("Insufficient allowance"):
-        token.transferFrom(accounts[0], accounts[2], "1 ether", {'from': accounts[0]})
+        token.transferFrom(accounts[0], accounts[2], "1 ether", {'from': accounts[idx]})
