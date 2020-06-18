@@ -1,1 +1,1 @@
-eth-brownie>=1.8.3,<2.0.0
+-e git://github.com/ignas/brownie.git@3334bd628fceaeb8be5050fb18989666a67a9ae0#egg=eth-brownie
