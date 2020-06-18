@@ -36,4 +36,9 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run Tests
-      run: brownie test
+      run: brownie test -C
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
