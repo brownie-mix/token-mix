@@ -1,13 +1,15 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
+
+// SPDX-License-Identifier: MIT
 
 import "./SafeMath.sol";
 
-contract Token {
+contract BasicERC20 {
 
     using SafeMath for uint256;
 
     string public symbol;
-    string public  name;
+    string public name;
     uint256 public decimals;
     uint256 public totalSupply;
 
@@ -33,10 +35,6 @@ contract Token {
         emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
-    function () external payable {
-        revert();
-    }
-
     function balanceOf(address _owner) public view returns (uint256) {
         return balances[_owner];
     }
@@ -58,10 +56,15 @@ contract Token {
         return true;
     }
 
-    function transfer(address _to, uint256 _value) public returns (bool) {
-        balances[msg.sender] = balances[msg.sender].sub(_value);
+    function _transfer(address _from, address _to, uint256 _value) internal {
+        require(balances[_from] >= _value, "Insufficient balance");
+        balances[_from] = balances[_from].sub(_value);
         balances[_to] = balances[_to].add(_value);
-        emit Transfer(msg.sender, _to, _value);
+        emit Transfer(_from, _to, _value);
+    }
+
+    function transfer(address _to, uint256 _value) public returns (bool) {
+        _transfer(msg.sender, _to, _value);
         return true;
     }
 
@@ -73,11 +76,9 @@ contract Token {
         public
         returns (bool)
     {
-        require(allowed[_from][msg.sender] >=_value, "Insufficient allowance");
-        balances[_from] = balances[_from].sub(_value);
+        require(allowed[_from][msg.sender] >= _value, "Insufficient allowance");
         allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
-        balances[_to] = balances[_to].add(_value);
-        emit Transfer(_from, _to, _value);
+        _transfer(_from, _to, _value);
         return true;
     }
 
