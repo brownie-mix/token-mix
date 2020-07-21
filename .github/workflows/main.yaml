@@ -8,9 +8,7 @@ on:
 name: main workflow
 
 env:
-  ETHERSCAN_TOKEN: 9MKURTHE8FNA9NRUUJBHMUEVY6IQ5K1EGY
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  WEB3_INFURA_PROJECT_ID: 44c6300c5e5b4b2da5fc42b06bf18a8e
 
 jobs:
 
@@ -41,4 +39,4 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run Tests
-      run: brownie test
+      run: brownie test -C
