@@ -50,4 +50,4 @@ def test_approval_event_fires(accounts, token):
     tx = token.approve(accounts[1], 10**19, {'from': accounts[0]})
 
     assert len(tx.events) == 1
-    assert tx.events["Approval"] == {'owner': accounts[0], 'spender': accounts[1], 'value': 10**19}
+    assert tx.events["Approval"].values() == [accounts[0], accounts[1], 10**19]

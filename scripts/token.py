@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-from brownie import BasicERC20, accounts
+from brownie import Token, accounts
 
 
 def main():
-    return BasicERC20.deploy("Test Token", "TST", 18, 1e21, {'from': accounts[0]})
+    return Token.deploy("Test Token", "TST", 18, 1e21, {'from': accounts[0]})

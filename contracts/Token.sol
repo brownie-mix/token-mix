@@ -9,7 +9,7 @@ import "./SafeMath.sol";
     @notice Based on the ERC-20 token standard as defined at
             https://eips.ethereum.org/EIPS/eip-20
  */
-contract BasicERC20 {
+contract Token {
 
     using SafeMath for uint256;
 
@@ -25,15 +25,15 @@ contract BasicERC20 {
     event Approval(address owner, address spender, uint256 value);
 
     constructor(
-        string memory _symbol,
         string memory _name,
+        string memory _symbol,
         uint256 _decimals,
         uint256 _totalSupply
     )
         public
     {
-        symbol = _symbol;
         name = _name;
+        symbol = _symbol;
         decimals = _decimals;
         totalSupply = _totalSupply;
         balances[msg.sender] = _totalSupply;
